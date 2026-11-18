@@ -1,0 +1,1179 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compréhension Écrite : Une rencontre au parc (Leçons 1 à 8)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Lora (para lectura cómoda del diálogo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Lora', 'Georgia', 'serif'],
+          },
+          colors: {
+            frenchBlue: {
+              950: '#0a1633',
+              900: '#102454',
+              800: '#19377d',
+              700: '#2149a6',
+              600: '#2b5cc9',
+              100: '#e6eeff',
+              50: '#f3f7ff',
+            },
+            frenchRed: {
+              600: '#dc2626',
+              500: '#ef4444',
+              100: '#fee2e2',
+              50: '#fef2f2',
+            },
+            frenchAmber: {
+              600: '#b45309',
+              500: '#d97706',
+              400: '#fbbf24',
+              100: '#fef3c7',
+              50: '#fffbeb',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f7fb;
+    }
+    .tricolor-stripe {
+      background: linear-gradient(90deg, #102454 0%, #102454 33.3%, #ffffff 33.3%, #ffffff 66.6%, #dc2626 66.6%, #dc2626 100%);
+    }
+    .dialogue-font {
+      font-family: 'Lora', Georgia, serif;
+    }
+    .fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Scrollbar sutil para el panel de lectura en escritorio */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 8px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Barra superior tricolor -->
+  <div class="h-1.5 w-full tricolor-stripe shadow-xs"></div>
+
+  <!-- Encabezado principal -->
+  <header class="bg-frenchBlue-900 text-white shadow-md sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-frenchBlue-800 border border-frenchBlue-600/50 flex items-center justify-center text-frenchAmber-400 shrink-0 shadow-inner">
+          <i class="fa-solid fa-book-open-reader text-lg"></i>
+        </div>
+        <div class="min-w-0">
+          <h1 class="font-bold text-sm sm:text-lg leading-tight truncate">
+            Compréhension Écrite : <span class="text-frenchAmber-400">Une rencontre au parc</span>
+          </h1>
+          <p class="text-xs text-slate-300 truncate">Curso Intensivo de Francés • Nivel A1 (Leçons 1 à 8)</p>
+        </div>
+      </div>
+
+      <!-- Indicadores activos durante el ejercicio -->
+      <div id="header-active-bar" class="hidden items-center gap-2.5 sm:gap-4 shrink-0">
+        <div class="hidden md:flex items-center gap-1.5 text-xs bg-frenchBlue-800 px-3 py-1.5 rounded-lg border border-frenchBlue-700">
+          <i class="fa-solid fa-user text-frenchAmber-400"></i>
+          <span id="header-student-name" class="font-medium max-w-[130px] truncate">Estudiante</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs sm:text-sm bg-emerald-950/70 text-emerald-300 border border-emerald-700/50 px-3 py-1.5 rounded-lg font-bold">
+          <i class="fa-solid fa-check-double"></i>
+          <span id="header-score">0 / 20</span>
+        </div>
+        <button type="button" onclick="confirmExit()" title="Volver al inicio"
+          class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-frenchBlue-800 transition">
+          <i class="fa-solid fa-house"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ==================== VISTA 1: PANTALLA DE INICIO ==================== -->
+    <section id="view-start" class="max-w-2xl mx-auto fade-in">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <!-- Cabecera ilustrada -->
+        <div class="bg-gradient-to-br from-frenchBlue-950 via-frenchBlue-900 to-frenchBlue-800 p-6 sm:p-8 text-white relative overflow-hidden">
+          <div class="relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-frenchAmber-400 border border-white/15 mb-3">
+              <i class="fa-solid fa-comments"></i> Ejercicio de Lectura • Bloque 1 (Lecciones 1–8)
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
+              Compréhension Écrite : Une rencontre au parc
+            </h2>
+            <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+              Lee atentamente la conversación en el parque entre <strong>Lucas</strong> y <strong>Claire</strong> sobre sus familias, actividades y mascotas, y responde las <strong>20 preguntas</strong> de comprensión.
+            </p>
+          </div>
+          <i class="fa-solid fa-tree text-white/5 text-9xl absolute -right-4 -bottom-6 pointer-events-none"></i>
+        </div>
+
+        <!-- Contenidos evaluados -->
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+            <div class="p-3 rounded-xl bg-frenchBlue-50 border border-frenchBlue-100">
+              <i class="fa-solid fa-handshake text-frenchBlue-700 mb-1"></i>
+              <div class="text-xs font-bold text-frenchBlue-900">Saludos</div>
+              <div class="text-[11px] text-slate-500">Expresiones clave</div>
+            </div>
+            <div class="p-3 rounded-xl bg-frenchBlue-50 border border-frenchBlue-100">
+              <i class="fa-solid fa-people-roof text-frenchBlue-700 mb-1"></i>
+              <div class="text-xs font-bold text-frenchBlue-900">La Familia</div>
+              <div class="text-[11px] text-slate-500">Lección 1</div>
+            </div>
+            <div class="p-3 rounded-xl bg-frenchBlue-50 border border-frenchBlue-100">
+              <i class="fa-solid fa-spell-check text-frenchBlue-700 mb-1"></i>
+              <div class="text-xs font-bold text-frenchBlue-900">Être / Avoir</div>
+              <div class="text-[11px] text-slate-500">Présent & Imparfait</div>
+            </div>
+            <div class="p-3 rounded-xl bg-frenchBlue-50 border border-frenchBlue-100">
+              <i class="fa-solid fa-pen-nib text-frenchBlue-700 mb-1"></i>
+              <div class="text-xs font-bold text-frenchBlue-900">Verbos -ER</div>
+              <div class="text-[11px] text-slate-500">Adjetivos y orden</div>
+            </div>
+          </div>
+
+          <!-- Input de nombre -->
+          <div>
+            <label for="student-name" class="block text-sm font-semibold text-slate-700 mb-2">
+              Nombre del Estudiante <span class="text-frenchRed-600">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                <i class="fa-solid fa-user-graduate"></i>
+              </span>
+              <input type="text" id="student-name" placeholder="Escribe tu nombre y apellido..."
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-frenchBlue-700 focus:border-frenchBlue-700 outline-none transition text-slate-800 font-medium"
+                onkeypress="if(event.key === 'Enter') startReadingExercise()">
+            </div>
+            <p id="name-error" class="hidden text-xs text-frenchRed-600 mt-1.5 font-medium flex items-center gap-1">
+              <i class="fa-solid fa-circle-exclamation"></i> Por favor, ingresa tu nombre antes de comenzar.
+            </p>
+          </div>
+
+          <!-- Instrucción breve -->
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-xs sm:text-sm text-slate-600 flex items-start gap-3">
+            <i class="fa-solid fa-circle-info text-frenchBlue-700 mt-0.5 text-base"></i>
+            <p>
+              <strong>Consejo de lectura:</strong> Durante todo el ejercicio tendrás el diálogo disponible en pantalla (junto a las preguntas en computadora, o mediante un botón desplegable rápido en teléfonos móviles) junto con un glosario de apoyo opcional.
+            </p>
+          </div>
+
+          <!-- Botón de inicio -->
+          <button type="button" onclick="startReadingExercise()"
+            class="w-full py-3.5 px-6 rounded-xl bg-frenchBlue-900 hover:bg-frenchBlue-800 active:scale-[0.99] text-white font-bold text-base shadow-md shadow-frenchBlue-900/20 transition flex items-center justify-center gap-2.5">
+            <span>Comenzar Comprensión Lectora (20 Preguntas)</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 2: EJERCICIO DIVIDIDO (LECTURA + PREGUNTAS) ==================== -->
+    <section id="view-exercise" class="hidden fade-in">
+      
+      <!-- Botón flotante/superior solo en móvil para mostrar/ocultar el texto rápidamente -->
+      <div class="lg:hidden mb-4">
+        <button type="button" onclick="toggleMobileText()"
+          class="w-full py-3 px-4 rounded-xl bg-frenchBlue-100 hover:bg-frenchBlue-200/70 text-frenchBlue-900 border border-frenchBlue-200 font-bold text-sm flex items-center justify-between transition">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-file-lines text-frenchBlue-700"></i>
+            <span id="mobile-text-btn-label">Ocultar texto de lectura</span>
+          </span>
+          <i id="mobile-text-chevron" class="fa-solid fa-chevron-up text-xs"></i>
+        </button>
+      </div>
+
+      <!-- Layout en 2 columnas en pantallas grandes (lg:grid-cols-12) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <!-- COLUMNA IZQUIERDA: TEXTO DE LECTURA Y GLOSARIO (6 columnas en lg) -->
+        <div id="reading-panel-wrapper" class="lg:col-span-6 lg:sticky lg:top-20 space-y-4">
+          <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <!-- Cabecera del texto -->
+            <div class="bg-frenchBlue-50 border-b border-frenchBlue-100 px-5 py-4 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-lg bg-frenchBlue-900 text-white flex items-center justify-center text-sm">
+                  <i class="fa-solid fa-book-open"></i>
+                </span>
+                <div>
+                  <h2 class="font-bold text-frenchBlue-950 text-sm sm:text-base">Une rencontre au parc</h2>
+                  <p class="text-[11px] text-slate-500">Dialogue entre Lucas et Claire</p>
+                </div>
+              </div>
+
+              <!-- Botón Glosario de ayuda -->
+              <button type="button" onclick="toggleGlossary()"
+                class="text-xs font-bold px-3 py-1.5 rounded-lg bg-frenchAmber-100 hover:bg-frenchAmber-200/80 text-frenchAmber-600 border border-frenchAmber-400/40 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-spell-check"></i>
+                <span id="glossary-btn-text">Mostrar glosario</span>
+              </button>
+            </div>
+
+            <!-- Glosario desplegable (oculto por defecto) -->
+            <div id="glossary-box" class="hidden bg-frenchAmber-50/90 border-b border-frenchAmber-200/80 px-5 py-4 fade-in">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-frenchAmber-600">
+                  <i class="fa-solid fa-lightbulb mr-1"></i> Glosario de apoyo (Vocabulario y Saludos)
+                </span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5 text-xs text-slate-700">
+                <div><strong class="text-frenchBlue-900">Bonjour / Salut :</strong> Buenos días / Hola</div>
+                <div><strong class="text-frenchBlue-900">Comment ça va ? :</strong> ¿Cómo estás? / ¿Qué tal?</div>
+                <div><strong class="text-frenchBlue-900">Ça va bien, merci :</strong> Estoy bien, gracias</div>
+                <div><strong class="text-frenchBlue-900">Enchanté(e) :</strong> Encantado/a (mucho gusto)</div>
+                <div><strong class="text-frenchBlue-900">Au revoir :</strong> Adiós / Hasta luego</div>
+                <div><strong class="text-frenchBlue-900">Maintenant :</strong> Ahora</div>
+                <div><strong class="text-frenchBlue-900">Ensemble :</strong> Juntos / Juntas</div>
+                <div><strong class="text-frenchBlue-900">Souvent :</strong> A menudo / Frecuentemente</div>
+                <div><strong class="text-frenchBlue-900">Aussi :</strong> También</div>
+                <div><strong class="text-frenchBlue-900">Tous les dimanches :</strong> Todos los domingos</div>
+              </div>
+            </div>
+
+            <!-- Cuerpo del Diálogo en Francés -->
+            <div class="p-5 sm:p-6 dialogue-font text-slate-800 text-[15px] sm:text-base leading-relaxed space-y-3.5 max-h-[62vh] lg:max-h-[68vh] overflow-y-auto custom-scroll">
+              <p class="text-xs font-sans italic text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                C'est dimanche matin. Lucas et Claire se rencontrent dans le grand parc de la ville.
+              </p>
+
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas :</strong> Bonjour Claire ! Comment ça va ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> Salut Lucas ! Ça va très bien, merci. Et toi ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas :</strong> Moi, je vais bien aussi. Regarde, je te présente mon cousin. Il s'appelle Paul.
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> Bonjour Paul ! Enchantée. Tu habites ici, dans cette ville ?
+              </p>
+              <p>
+                <strong class="font-sans text-emerald-700 font-bold">Paul :</strong> Enchanté Claire ! Non, j'habite à Madrid, mais maintenant je visite ma tante et mon oncle. Le père de Lucas est mon oncle.
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> Ah, je comprends ! Ton oncle est avocat, n'est-ce pas ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas :</strong> Oui, mon père est avocat et ma mère travaille dans un bureau. Et ta famille, Claire ? Comment sont tes parents ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> Mes parents travaillent beaucoup. Mon frère est étudiant et ma petite sœur chante et danse très bien. Elle aime la musique ! Moi, j'écoute la musique avec elle et je la regarde danser.
+              </p>
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas :</strong> C'est super ! Vous avez une grande maison ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> Oui, nous avons une grande maison blanche avec un petit jardin et des arbres verts. Avant, nous avions un appartement étroit, mais maintenant la maison est large et jolie. Et vous, vous avez des animaux ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas :</strong> Oui, nous avons un chien noir. Il est très rapide ! Le chien court dans le parc avec Paul. Et toi ?
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> Moi, j'ai un chat blanc. Il est lent et il dort sur le canapé du salon. Tous les dimanches, ma grand-mère et mon grand-père visitent notre maison. Ma grand-mère parle à mon frère et elle lui donne des livres intéressants.
+              </p>
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas :</strong> Quelle belle famille ! Regarde, ma nièce arrive avec ma sœur. Nous allons au restaurant ensemble.
+              </p>
+              <p>
+                <strong class="font-sans text-frenchRed-600 font-bold">Claire :</strong> D'accord ! Bon appétit et au revoir Lucas ! Au revoir Paul !
+              </p>
+              <p>
+                <strong class="font-sans text-frenchBlue-800 font-bold">Lucas et Paul :</strong> Au revoir Claire ! À bientôt !
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- COLUMNA DERECHA: PANEL DE PREGUNTAS (6 columnas en lg) -->
+        <div class="lg:col-span-6 space-y-5">
+          
+          <!-- Progreso -->
+          <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-600 mb-2">
+              <span id="q-category-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-frenchBlue-100 text-frenchBlue-900 font-bold text-xs">
+                <i class="fa-solid fa-tag text-frenchBlue-700"></i>
+                <span>Saludos y Presentación</span>
+              </span>
+              <span>Pregunta <strong id="q-current" class="text-frenchBlue-900">1</strong> de <strong class="text-frenchBlue-900">20</strong></span>
+            </div>
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div id="progress-bar" class="bg-gradient-to-r from-frenchBlue-800 to-frenchBlue-600 h-full rounded-full transition-all duration-300" style="width: 5%"></div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de pregunta activa -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-7">
+            <div class="mb-5">
+              <span class="text-xs font-bold uppercase tracking-wider text-frenchAmber-600 block mb-1">
+                Comprensión Lectora • Ítem #<span id="q-number">1</span>
+              </span>
+              <h3 id="question-text" class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Cargando pregunta...
+              </h3>
+            </div>
+
+            <!-- Opciones -->
+            <div id="options-container" class="space-y-3">
+              <!-- Opciones renderizadas dinámicamente -->
+            </div>
+
+            <!-- Retroalimentación inmediata -->
+            <div id="feedback-box" class="hidden mt-5 p-4 rounded-xl border transition-all fade-in">
+              <div class="flex items-start gap-3">
+                <div id="feedback-icon" class="w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-white text-xs">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="flex-1">
+                  <h4 id="feedback-title" class="font-bold text-sm mb-1">¡Correcto!</h4>
+                  <p id="feedback-explanation" class="text-xs sm:text-sm leading-relaxed text-slate-700">
+                    Explicación basada en el texto.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navegación inferior -->
+            <div class="mt-7 pt-5 border-t border-slate-100 flex items-center justify-between gap-2">
+              <button type="button" id="btn-prev" onclick="prevQuestion()"
+                class="px-3.5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold text-xs sm:text-sm transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+                <span>Anterior</span>
+              </button>
+
+              <button type="button" onclick="toggleQuestionMap()"
+                class="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs sm:text-sm transition flex items-center gap-1.5">
+                <i class="fa-solid fa-grip"></i>
+                <span class="hidden sm:inline">Mapa (20)</span>
+              </button>
+
+              <button type="button" id="btn-next" onclick="nextQuestion()"
+                class="px-5 py-2.5 rounded-xl bg-frenchBlue-900 hover:bg-frenchBlue-800 text-white font-bold text-xs sm:text-sm shadow-sm transition flex items-center gap-2">
+                <span id="btn-next-text">Siguiente</span>
+                <i id="btn-next-icon" class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mapa rápido de las 20 preguntas -->
+          <div id="question-map-panel" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-5 fade-in">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <h4 class="font-bold text-xs sm:text-sm text-slate-800">Mapa de las 20 preguntas</h4>
+              <div class="flex items-center gap-3 text-[11px] text-slate-500">
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Correcta</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-frenchRed-500 inline-block"></span> Incorrecta</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-200 inline-block"></span> Pendiente</span>
+              </div>
+            </div>
+            <div id="question-map-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+              <!-- Botones 1..20 -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 3: PANTALLA DE RESULTADOS ==================== -->
+    <section id="view-results" class="hidden max-w-3xl mx-auto fade-in space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <!-- Banner de resultados -->
+        <div class="bg-gradient-to-br from-frenchBlue-950 via-frenchBlue-900 to-frenchBlue-800 p-6 sm:p-8 text-white text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 border border-frenchAmber-400/40 text-frenchAmber-400 text-3xl mb-3 shadow-lg">
+            <i class="fa-solid fa-medal"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold mb-1">¡Ejercicio Completado!</h2>
+          <p class="text-slate-300 text-sm sm:text-base">
+            Estudiante: <strong id="result-student-name" class="text-white">Estudiante</strong>
+          </p>
+
+          <!-- Tarjetas de puntaje -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-5 max-w-lg mx-auto mt-6">
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
+              <div class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Nota Final</div>
+              <div id="result-grade-20" class="text-2xl sm:text-3xl font-extrabold text-frenchAmber-400 mt-1">0 / 20</div>
+              <div id="result-percentage" class="text-xs text-slate-300 mt-0.5">0%</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
+              <div class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Aciertos</div>
+              <div id="result-correct" class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">0</div>
+              <div class="text-xs text-slate-300 mt-0.5">de 20</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3.5 border border-white/10">
+              <div class="text-[11px] text-slate-300 uppercase tracking-wider font-semibold">Errores</div>
+              <div id="result-wrong" class="text-2xl sm:text-3xl font-extrabold text-rose-400 mt-1">0</div>
+              <div class="text-xs text-slate-300 mt-0.5">por revisar</div>
+            </div>
+          </div>
+
+          <div id="result-feedback-banner" class="mt-5 inline-block px-4 py-2.5 rounded-xl bg-frenchBlue-950/70 border border-white/15 text-xs sm:text-sm text-slate-100">
+            Mensaje motivador
+          </div>
+        </div>
+
+        <!-- Controles de revisión y exportación -->
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pb-5 border-b border-slate-100">
+            <!-- Filtro Todas / Solo Incorrectas -->
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <button type="button" id="filter-all-btn" onclick="renderResultsReview('ALL')"
+                class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-frenchBlue-900 text-white font-bold text-xs sm:text-sm transition">
+                Todas (20)
+              </button>
+              <button type="button" id="filter-wrong-btn" onclick="renderResultsReview('WRONG')"
+                class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition">
+                Solo Incorrectas (<span id="wrong-filter-count">0</span>)
+              </button>
+            </div>
+
+            <!-- Copiar reporte y Reiniciar -->
+            <div class="flex items-center gap-2.5 w-full sm:w-auto">
+              <button type="button" onclick="copyReport()"
+                class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-copy"></i>
+                <span>Copiar Reporte</span>
+              </button>
+              <button type="button" onclick="resetApp()"
+                class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-frenchBlue-900 hover:bg-frenchBlue-800 text-white font-bold text-xs sm:text-sm shadow-sm transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Reiniciar</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Lista detallada de revisión -->
+          <div id="results-review-list" class="space-y-4">
+            <!-- Tarjetas de revisión generadas dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal de Confirmación de Salida -->
+  <div id="exit-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 fade-in">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-frenchAmber-100 text-frenchAmber-600 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900">¿Volver al inicio?</h3>
+      </div>
+      <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+        Si regresas a la pantalla inicial perderás el progreso actual de tus respuestas en esta lectura.
+      </p>
+      <div class="flex items-center justify-end gap-3">
+        <button type="button" onclick="closeExitModal()"
+          class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition">
+          Continuar lectura
+        </button>
+        <button type="button" onclick="resetApp()"
+          class="px-4 py-2 rounded-xl bg-frenchRed-600 hover:bg-frenchRed-500 text-white font-bold text-sm transition">
+          Sí, salir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificación Toast -->
+  <div id="toast" class="hidden fixed bottom-5 right-5 z-50 bg-frenchBlue-950 text-white px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2.5 fade-in">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toast-msg">Reporte copiado</span>
+  </div>
+
+  <!-- Pie de página -->
+  <footer class="bg-white border-t border-slate-200 py-4 px-4 text-center text-xs text-slate-500 mt-auto">
+    Curso Intensivo de Francés (Nivel A1-A2) • Comprensión Lectora: Lecciones 1 a 8
+  </footer>
+
+  <!-- ==================== LÓGICA Y BANCO DE 20 PREGUNTAS ==================== -->
+  <script>
+    const READING_QUESTIONS = [
+      {
+        id: 1,
+        category: "Saludos y Contexto",
+        question: "¿Dónde y cuándo se encuentran Lucas y Claire?",
+        options: [
+          "El domingo por la mañana en el gran parque de la ciudad.",
+          "El sábado por la tarde en un restaurante.",
+          "El domingo por la noche en la casa de Claire.",
+          "El lunes por la mañana en la oficina del padre de Lucas."
+        ],
+        correctIndex: 0,
+        explanation: "El texto inicia diciendo: «C'est dimanche matin. Lucas et Claire se rencontrent dans le grand parc de la ville» (Es domingo por la mañana y se encuentran en el gran parque de la ciudad)."
+      },
+      {
+        id: 2,
+        category: "Saludos y Expresiones",
+        question: "Cuando Lucas le pregunta «Comment ça va ?», ¿cómo responde Claire?",
+        options: [
+          "«Enchantée, merci.»",
+          "«Ça va très bien, merci. Et toi ?»",
+          "«Au revoir, à bientôt !»",
+          "«Bon appétit, merci.»"
+        ],
+        correctIndex: 1,
+        explanation: "Claire responde con el saludo cordial: «Salut Lucas ! Ça va très bien, merci. Et toi ?» (Estoy muy bien, gracias. ¿Y tú?)."
+      },
+      {
+        id: 3,
+        category: "La Familia (Leçon 1)",
+        question: "¿Qué parentesco tiene Paul con Lucas?",
+        options: [
+          "Es su hermano (son frère).",
+          "Es su primo (son cousin).",
+          "Es su sobrino (son neveu).",
+          "Es su tío (son oncle)."
+        ],
+        correctIndex: 1,
+        explanation: "Lucas dice: «Regarde, je te présente mon cousin. Il s'appelle Paul» (Mira, te presento a mi primo. Se llama Paul)."
+      },
+      {
+        id: 4,
+        category: "Saludos de Presentación",
+        question: "¿Qué palabra utiliza Claire para decir «Mucho gusto / Encantada» al conocer a Paul?",
+        options: [
+          "Salut",
+          "Merci",
+          "Enchantée",
+          "Ensemble"
+        ],
+        correctIndex: 2,
+        explanation: "Al ser presentada a Paul, Claire dice: «Bonjour Paul ! Enchantée.» (¡Buenos días Paul! Encantada)."
+      },
+      {
+        id: 5,
+        category: "Verbos 1er grupo y Ubicación (Leçon 7)",
+        question: "¿Dónde vive (habite) Paul normalmente?",
+        options: [
+          "En París.",
+          "En Madrid.",
+          "En la casa de Claire.",
+          "En un apartamento en el centro."
+        ],
+        correctIndex: 1,
+        explanation: "Paul explica usando el verbo del 1er grupo 'habiter': «Non, j'habite à Madrid, mais maintenant je visite ma tante et mon oncle»."
+      },
+      {
+        id: 6,
+        category: "La Familia (Leçon 1)",
+        question: "¿Quiénes son «ma tante et mon oncle» para Paul?",
+        options: [
+          "Los padres de Claire.",
+          "Los abuelos de Lucas.",
+          "Los padres de Lucas.",
+          "Los hermanos de Claire."
+        ],
+        correctIndex: 2,
+        explanation: "Paul aclara el parentesco: «Le père de Lucas est mon oncle» (El padre de Lucas es mi tío), por lo tanto visita a los padres de Lucas."
+      },
+      {
+        id: 7,
+        category: "Verbo Être y Profesiones (Leçon 2)",
+        question: "¿Cuál es la profesión del padre de Lucas?",
+        options: [
+          "Es estudiante (étudiant).",
+          "Es abogado (avocat).",
+          "Es médico (médecin).",
+          "Es profesor (professeur)."
+        ],
+        correctIndex: 1,
+        explanation: "Lucas confirma con el verbo 'être': «Oui, mon père est avocat et ma mère travaille dans un bureau»."
+      },
+      {
+        id: 8,
+        category: "Verbos del 1er grupo (Leçon 7)",
+        question: "¿Dónde trabaja la madre de Lucas?",
+        options: [
+          "En un restaurante.",
+          "En el parque.",
+          "En una oficina / despacho (un bureau).",
+          "En un hospital."
+        ],
+        correctIndex: 2,
+        explanation: "El diálogo indica: «ma mère travaille dans un bureau» (mi madre trabaja en un despacho/oficina)."
+      },
+      {
+        id: 9,
+        category: "La Familia y Verbo Être (Leçons 1–2)",
+        question: "¿A qué se dedica el hermano de Claire?",
+        options: [
+          "Es abogado.",
+          "Es estudiante.",
+          "Trabaja en un restaurante.",
+          "Vive en Madrid."
+        ],
+        correctIndex: 1,
+        explanation: "Claire dice: «Mon frère est étudiant» (Mi hermano es estudiante)."
+      },
+      {
+        id: 10,
+        category: "Verbos del 1er grupo (Leçon 7)",
+        question: "¿Qué actividades realiza muy bien la hermana pequeña de Claire?",
+        options: [
+          "Corre y juega en el parque.",
+          "Canta y baila muy bien (chante et danse très bien).",
+          "Lee libros interesantes.",
+          "Trabaja en una oficina."
+        ],
+        correctIndex: 1,
+        explanation: "Claire usa dos verbos del 1er grupo en 3.ª persona singular: «ma petite sœur chante et danse très bien»."
+      },
+      {
+        id: 11,
+        category: "Pronombres de Complemento (Leçon 1)",
+        question: "En la frase de Claire: «j'écoute la musique avec elle et je la regarde danser», ¿a quién sustituye el pronombre «la»?",
+        options: [
+          "A la música (la musique).",
+          "A su madre (sa mère).",
+          "A su hermana pequeña (sa petite sœur).",
+          "A su abuela (sa grand-mère)."
+        ],
+        correctIndex: 2,
+        explanation: "El pronombre de complemento directo 'la' sustituye a 'ma petite sœur' («je la regarde danser» = yo la miro bailar)."
+      },
+      {
+        id: 12,
+        category: "Concordancia de Adjetivos (Leçon 6)",
+        question: "¿Cómo es la casa actual de la familia de Claire?",
+        options: [
+          "Pequeña y estrecha (petite et étroite).",
+          "Grande y blanca, amplia y bonita (grande, blanche, large et jolie).",
+          "Pequeña y negra (petite et noire).",
+          "Grande y roja (grande et rouge)."
+        ],
+        correctIndex: 1,
+        explanation: "Claire describe su casa concordando los adjetivos en femenino: «une grande maison blanche... maintenant la maison est large et jolie»."
+      },
+      {
+        id: 13,
+        category: "Artículos y Plurales (Leçons 4–5)",
+        question: "¿Qué hay en el pequeño jardín de la casa de Claire?",
+        options: [
+          "Un perro negro y un gato blanco.",
+          "Un coche rojo.",
+          "Unos árboles verdes (des arbres verts).",
+          "Una fuente y un monumento."
+        ],
+        correctIndex: 2,
+        explanation: "Claire dice: «avec un petit jardin et des arbres verts» (con un pequeño jardín y unos árboles verdes, usando el artículo indefinido plural 'des')."
+      },
+      {
+        id: 14,
+        category: "Imparfait de Avoir (Leçon 3)",
+        question: "¿Qué tipo de vivienda tenía antes (avant) la familia de Claire?",
+        options: [
+          "Tenían un apartamento estrecho (un appartement étroit).",
+          "Tenían una casa pequeña en Madrid.",
+          "Tenían un castillo grande.",
+          "Tenían una casa con jardín."
+        ],
+        correctIndex: 0,
+        explanation: "Usando el imperfecto del verbo 'avoir', Claire dice: «Avant, nous avions un appartement étroit» (Antes teníamos un apartamento estrecho)."
+      },
+      {
+        id: 15,
+        category: "Verbo Avoir y Adjetivos (Leçons 3 y 6)",
+        question: "¿Qué mascota tiene la familia de Lucas y cómo es?",
+        options: [
+          "Un gato blanco y lento.",
+          "Un perro negro y muy rápido.",
+          "Un perro blanco y lento.",
+          "Un gato negro y rápido."
+        ],
+        correctIndex: 1,
+        explanation: "Lucas dice: «nous avons un chien noir. Il est très rapide !» (Tenemos un perro negro. ¡Es muy rápido!)."
+      },
+      {
+        id: 16,
+        category: "Estructura de la Oración (Leçon 8)",
+        question: "¿Qué hace el perro de Lucas en el parque?",
+        options: [
+          "Duerme en el sofá.",
+          "Corre en el parque con Paul (court dans le parc avec Paul).",
+          "Baila con la hermana de Claire.",
+          "Come con la abuela."
+        ],
+        correctIndex: 1,
+        explanation: "El texto señala: «Le chien court dans le parc avec Paul» (El perro corre en el parque con Paul)."
+      },
+      {
+        id: 17,
+        category: "Vocabulario de la Casa (Leçons 5–6)",
+        question: "¿Dónde duerme el gato blanco de Claire?",
+        options: [
+          "En el jardín (dans le jardin).",
+          "En la cama del dormitorio (sur le lit).",
+          "En el sofá del salón (sur le canapé du salon).",
+          "Debajo de la mesa de la cocina (sous la table)."
+        ],
+        correctIndex: 2,
+        explanation: "Claire comenta: «Il est lent et il dort sur le canapé du salon» (Es lento y duerme sobre el sofá del salón)."
+      },
+      {
+        id: 18,
+        category: "La Familia (Leçon 1)",
+        question: "¿Quiénes visitan la casa de Claire todos los domingos?",
+        options: [
+          "Su tío y su tía.",
+          "Su abuela y su abuelo (sa grand-mère et son grand-père).",
+          "Lucas y Paul.",
+          "Su sobrino y su sobrina."
+        ],
+        correctIndex: 1,
+        explanation: "Claire explica: «Tous les dimanches, ma grand-mère et mon grand-père visitent notre maison» (Todos los domingos, mi abuela y mi abuelo visitan nuestra casa)."
+      },
+      {
+        id: 19,
+        category: "Pronombres de Objeto Indirecto (Leçon 1 y 8)",
+        question: "En la oración «Ma grand-mère parle à mon frère et elle lui donne des livres», ¿qué significa «lui»?",
+        options: [
+          "A ellos (a los perros).",
+          "A él (a mi hermano).",
+          "A nosotros.",
+          "A ella (a la abuela)."
+        ],
+        correctIndex: 1,
+        explanation: "'Lui' es el pronombre de objeto indirecto de 3.ª persona singular y reemplaza a 'à mon frère' («ella le da libros interesantes»)."
+      },
+      {
+        id: 20,
+        category: "Despedida y Familia (Leçons 1 y 8)",
+        question: "¿Con quién llega la sobrina de Lucas al final y adónde van juntos?",
+        options: [
+          "Llega con su madre y van a la estación.",
+          "Llega con la hermana de Lucas y van juntos al restaurante.",
+          "Llega con Paul y van a casa de Claire.",
+          "Llega con su abuelo y van al cine."
+        ],
+        correctIndex: 1,
+        explanation: "Lucas dice al despedirse: «ma nièce arrive avec ma sœur. Nous allons au restaurant ensemble» (mi sobrina llega con mi hermana. Vamos al restaurante juntos)."
+      }
+    ];
+
+    // Estado de la aplicación
+    let state = {
+      studentName: "",
+      currentIndex: 0,
+      userAnswers: {}, // { index: optionIndex }
+      mobileTextVisible: true,
+      glossaryVisible: false,
+      mapVisible: false
+    };
+
+    function startReadingExercise() {
+      const input = document.getElementById("student-name");
+      const errorMsg = document.getElementById("name-error");
+      const name = input.value.trim();
+
+      if (!name) {
+        errorMsg.classList.remove("hidden");
+        input.classList.add("border-frenchRed-500");
+        input.focus();
+        return;
+      }
+
+      errorMsg.classList.add("hidden");
+      input.classList.remove("border-frenchRed-500");
+      state.studentName = name;
+      state.currentIndex = 0;
+      state.userAnswers = {};
+
+      document.getElementById("header-student-name").textContent = state.studentName;
+      document.getElementById("header-active-bar").classList.remove("hidden");
+      document.getElementById("header-active-bar").classList.add("flex");
+
+      document.getElementById("view-start").classList.add("hidden");
+      document.getElementById("view-results").classList.add("hidden");
+      document.getElementById("view-exercise").classList.remove("hidden");
+
+      renderQuestion();
+      renderQuestionMap();
+      updateHeaderScore();
+    }
+
+    function toggleMobileText() {
+      const wrapper = document.getElementById("reading-panel-wrapper");
+      const label = document.getElementById("mobile-text-btn-label");
+      const chevron = document.getElementById("mobile-text-chevron");
+
+      state.mobileTextVisible = !state.mobileTextVisible;
+      wrapper.classList.toggle("hidden", !state.mobileTextVisible);
+
+      if (state.mobileTextVisible) {
+        label.textContent = "Ocultar texto de lectura";
+        chevron.className = "fa-solid fa-chevron-up text-xs";
+      } else {
+        label.textContent = "Ver texto de lectura (Une rencontre au parc)";
+        chevron.className = "fa-solid fa-chevron-down text-xs";
+      }
+    }
+
+    function toggleGlossary() {
+      const box = document.getElementById("glossary-box");
+      const btnText = document.getElementById("glossary-btn-text");
+      state.glossaryVisible = !state.glossaryVisible;
+      box.classList.toggle("hidden", !state.glossaryVisible);
+      btnText.textContent = state.glossaryVisible ? "Ocultar glosario" : "Mostrar glosario";
+    }
+
+    function renderQuestion() {
+      const q = READING_QUESTIONS[state.currentIndex];
+      const total = READING_QUESTIONS.length;
+      const currentNum = state.currentIndex + 1;
+      const answeredIdx = state.userAnswers[state.currentIndex];
+      const isAnswered = answeredIdx !== undefined;
+
+      // Encabezado de progreso
+      document.getElementById("q-category-badge").innerHTML = `<i class="fa-solid fa-tag text-frenchBlue-700"></i> <span>${q.category}</span>`;
+      document.getElementById("q-current").textContent = currentNum;
+      const pct = Math.round((currentNum / total) * 100);
+      document.getElementById("progress-bar").style.width = `${pct}%`;
+
+      document.getElementById("q-number").textContent = q.id;
+      document.getElementById("question-text").textContent = q.question;
+
+      // Opciones
+      const container = document.getElementById("options-container");
+      container.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.disabled = isAnswered;
+
+        let cardCls = "w-full text-left p-3.5 sm:p-4 rounded-xl border-2 transition flex items-center justify-between gap-3 ";
+        let badgeCls = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-bold text-xs sm:text-sm shrink-0 ";
+        let iconHtml = "";
+
+        if (!isAnswered) {
+          cardCls += "border-slate-200 hover:border-frenchBlue-700 hover:bg-frenchBlue-50/50 bg-white cursor-pointer";
+          badgeCls += "bg-slate-100 text-slate-700";
+        } else {
+          if (idx === q.correctIndex) {
+            cardCls += "border-emerald-500 bg-emerald-50/80 text-emerald-950 font-semibold";
+            badgeCls += "bg-emerald-600 text-white";
+            iconHtml = '<i class="fa-solid fa-circle-check text-emerald-600 text-lg shrink-0"></i>';
+          } else if (idx === answeredIdx && idx !== q.correctIndex) {
+            cardCls += "border-frenchRed-500 bg-frenchRed-50/80 text-frenchRed-950";
+            badgeCls += "bg-frenchRed-600 text-white";
+            iconHtml = '<i class="fa-solid fa-circle-xmark text-frenchRed-600 text-lg shrink-0"></i>';
+          } else {
+            cardCls += "border-slate-100 bg-slate-50/60 text-slate-400 opacity-75";
+            badgeCls += "bg-slate-200 text-slate-500";
+          }
+        }
+
+        btn.className = cardCls;
+        btn.onclick = () => selectOption(idx);
+        btn.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="${badgeCls}">${letters[idx]}</span>
+            <span class="text-xs sm:text-sm leading-snug">${opt}</span>
+          </div>
+          ${iconHtml}
+        `;
+        container.appendChild(btn);
+      });
+
+      // Retroalimentación inmediata
+      const fbBox = document.getElementById("feedback-box");
+      if (isAnswered) {
+        const isCorrect = answeredIdx === q.correctIndex;
+        fbBox.classList.remove("hidden", "bg-emerald-50", "border-emerald-200", "bg-frenchRed-50", "border-frenchRed-200");
+        const fbIcon = document.getElementById("feedback-icon");
+        const fbTitle = document.getElementById("feedback-title");
+
+        if (isCorrect) {
+          fbBox.classList.add("bg-emerald-50", "border-emerald-200");
+          fbIcon.className = "w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-white text-xs bg-emerald-600";
+          fbIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
+          fbTitle.className = "font-bold text-sm mb-1 text-emerald-900";
+          fbTitle.textContent = "¡Correcto ! Muy buena comprensión";
+        } else {
+          fbBox.classList.add("bg-frenchRed-50", "border-frenchRed-200");
+          fbIcon.className = "w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-white text-xs bg-frenchRed-600";
+          fbIcon.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+          fbTitle.className = "font-bold text-sm mb-1 text-frenchRed-900";
+          fbTitle.textContent = "Respuesta incorrecta — Revisa el texto";
+        }
+
+        document.getElementById("feedback-explanation").textContent = q.explanation;
+      } else {
+        fbBox.classList.add("hidden");
+      }
+
+      // Botones de navegación
+      document.getElementById("btn-prev").disabled = state.currentIndex === 0;
+      const nextText = document.getElementById("btn-next-text");
+      const nextIcon = document.getElementById("btn-next-icon");
+
+      if (state.currentIndex === total - 1) {
+        nextText.textContent = "Ver Resultados";
+        nextIcon.className = "fa-solid fa-flag-checkered text-xs";
+      } else {
+        nextText.textContent = "Siguiente";
+        nextIcon.className = "fa-solid fa-chevron-right text-xs";
+      }
+
+      updateHeaderScore();
+      if (state.mapVisible) renderQuestionMap();
+    }
+
+    function selectOption(idx) {
+      if (state.userAnswers[state.currentIndex] !== undefined) return;
+      state.userAnswers[state.currentIndex] = idx;
+      renderQuestion();
+      renderQuestionMap();
+    }
+
+    function updateHeaderScore() {
+      let correct = 0;
+      Object.keys(state.userAnswers).forEach(k => {
+        if (state.userAnswers[k] === READING_QUESTIONS[k].correctIndex) correct++;
+      });
+      document.getElementById("header-score").textContent = `${correct} / ${READING_QUESTIONS.length}`;
+    }
+
+    function prevQuestion() {
+      if (state.currentIndex > 0) {
+        state.currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      if (state.currentIndex < READING_QUESTIONS.length - 1) {
+        state.currentIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function toggleQuestionMap() {
+      const panel = document.getElementById("question-map-panel");
+      state.mapVisible = !state.mapVisible;
+      panel.classList.toggle("hidden", !state.mapVisible);
+      if (state.mapVisible) renderQuestionMap();
+    }
+
+    function renderQuestionMap() {
+      const grid = document.getElementById("question-map-grid");
+      grid.innerHTML = "";
+      READING_QUESTIONS.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = idx + 1;
+        const ans = state.userAnswers[idx];
+
+        let cls = "h-8 rounded-lg text-xs font-bold transition border ";
+        if (ans === undefined) {
+          cls += "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100";
+        } else if (ans === q.correctIndex) {
+          cls += "bg-emerald-500 text-white border-emerald-600";
+        } else {
+          cls += "bg-frenchRed-500 text-white border-frenchRed-600";
+        }
+
+        if (idx === state.currentIndex) {
+          cls += " ring-2 ring-frenchBlue-900 ring-offset-1";
+        }
+
+        btn.className = cls;
+        btn.onclick = () => {
+          state.currentIndex = idx;
+          renderQuestion();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function showResults() {
+      const total = READING_QUESTIONS.length;
+      let correct = 0;
+      READING_QUESTIONS.forEach((q, idx) => {
+        if (state.userAnswers[idx] === q.correctIndex) correct++;
+      });
+
+      const wrong = total - correct;
+      const pct = Math.round((correct / total) * 100);
+
+      document.getElementById("result-student-name").textContent = state.studentName;
+      document.getElementById("result-grade-20").textContent = `${correct} / 20`;
+      document.getElementById("result-percentage").textContent = `${pct}%`;
+      document.getElementById("result-correct").textContent = correct;
+      document.getElementById("result-wrong").textContent = wrong;
+      document.getElementById("wrong-filter-count").textContent = wrong;
+
+      const banner = document.getElementById("result-feedback-banner");
+      if (pct >= 90) {
+        banner.innerHTML = `<i class="fa-solid fa-star text-frenchAmber-400 mr-1.5"></i> <strong>¡Excellent !</strong> Comprendes perfectamente los diálogos, saludos y estructuras de las Lecciones 1 a 8.`;
+      } else if (pct >= 75) {
+        banner.innerHTML = `<i class="fa-solid fa-thumbs-up text-emerald-400 mr-1.5"></i> <strong>¡Très bien !</strong> Excelente comprensión general del texto. Revisa los detalles puntuales abajo.`;
+      } else if (pct >= 50) {
+        banner.innerHTML = `<i class="fa-solid fa-book-open text-frenchAmber-400 mr-1.5"></i> <strong>¡Bon effort !</strong> Te sugerimos releer el diálogo prestando atención a los pronombres y parentescos.`;
+      } else {
+        banner.innerHTML = `<i class="fa-solid fa-rotate text-rose-400 mr-1.5"></i> <strong>Sigue practicando:</strong> Repasa el vocabulario de la familia, los verbos <em>être/avoir</em> y vuelve a intentarlo.`;
+      }
+
+      document.getElementById("view-exercise").classList.add("hidden");
+      document.getElementById("view-results").classList.remove("hidden");
+      renderResultsReview("ALL");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderResultsReview(filterMode) {
+      const btnAll = document.getElementById("filter-all-btn");
+      const btnWrong = document.getElementById("filter-wrong-btn");
+
+      if (filterMode === "ALL") {
+        btnAll.className = "flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-frenchBlue-900 text-white font-bold text-xs sm:text-sm transition";
+        btnWrong.className = "flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition";
+      } else {
+        btnWrong.className = "flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-frenchRed-600 text-white font-bold text-xs sm:text-sm transition";
+        btnAll.className = "flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition";
+      }
+
+      const list = document.getElementById("results-review-list");
+      list.innerHTML = "";
+
+      let shownCount = 0;
+
+      READING_QUESTIONS.forEach((q, idx) => {
+        const userAns = state.userAnswers[idx];
+        const isCorrect = userAns === q.correctIndex;
+
+        if (filterMode === "WRONG" && isCorrect) return;
+        shownCount++;
+
+        const userText = userAns !== undefined ? q.options[userAns] : "Sin responder";
+        const correctText = q.options[q.correctIndex];
+
+        const item = document.createElement("div");
+        item.className = `p-4 rounded-xl border ${isCorrect ? "border-emerald-200 bg-emerald-50/30" : "border-frenchRed-200 bg-frenchRed-50/30"} space-y-2`;
+        item.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-md ${isCorrect ? "bg-emerald-100 text-emerald-800" : "bg-frenchRed-100 text-frenchRed-800"}">
+              ${isCorrect ? '<i class="fa-solid fa-check mr-1"></i>Correcta' : '<i class="fa-solid fa-xmark mr-1"></i>Incorrecta'} • ${q.category}
+            </span>
+            <span class="text-xs text-slate-400 font-semibold">Pregunta #${q.id}</span>
+          </div>
+          <p class="font-bold text-sm sm:text-base text-slate-900">${q.question}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+            <div class="p-2.5 rounded-lg border ${isCorrect ? "bg-emerald-50 border-emerald-200 text-emerald-900" : "bg-frenchRed-50 border-frenchRed-200 text-frenchRed-900"}">
+              <span class="block text-[10px] uppercase font-bold opacity-75">Tu respuesta:</span>
+              ${userText}
+            </div>
+            ${!isCorrect ? `
+              <div class="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900">
+                <span class="block text-[10px] uppercase font-bold text-emerald-700">Respuesta correcta:</span>
+                ${correctText}
+              </div>
+            ` : ""}
+          </div>
+          <p class="text-xs text-slate-600 bg-white p-2.5 rounded-lg border border-slate-200/80">
+            <i class="fa-solid fa-quote-left text-frenchBlue-600 mr-1"></i> ${q.explanation}
+          </p>
+        `;
+        list.appendChild(item);
+      });
+
+      if (shownCount === 0 && filterMode === "WRONG") {
+        list.innerHTML = `
+          <div class="text-center py-8 px-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900">
+            <i class="fa-solid fa-circle-check text-3xl text-emerald-600 mb-2"></i>
+            <p class="font-bold text-base">¡Félicitations ! No tienes ninguna respuesta incorrecta.</p>
+          </div>
+        `;
+      }
+    }
+
+    function copyReport() {
+      const total = READING_QUESTIONS.length;
+      let correct = 0;
+      READING_QUESTIONS.forEach((q, idx) => {
+        if (state.userAnswers[idx] === q.correctIndex) correct++;
+      });
+      const pct = Math.round((correct / total) * 100);
+
+      const text = [
+        `COMPRÉHENSION ÉCRITE : UNE RENCONTRE AU PARC (LEÇONS 1 À 8)`,
+        `Estudiante: ${state.studentName}`,
+        `Calificación: ${correct}/20 (${pct}%)`,
+        `Aciertos: ${correct} de ${total} preguntas`
+      ].join("\n");
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+
+      const toast = document.getElementById("toast");
+      document.getElementById("toast-msg").textContent = "Reporte copiado al portapapeles";
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 3000);
+    }
+
+    function confirmExit() {
+      document.getElementById("exit-modal").classList.remove("hidden");
+    }
+
+    function closeExitModal() {
+      document.getElementById("exit-modal").classList.add("hidden");
+    }
+
+    function resetApp() {
+      closeExitModal();
+      document.getElementById("header-active-bar").classList.add("hidden");
+      document.getElementById("header-active-bar").classList.remove("flex");
+      document.getElementById("view-exercise").classList.add("hidden");
+      document.getElementById("view-results").classList.add("hidden");
+      document.getElementById("view-start").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
+```
